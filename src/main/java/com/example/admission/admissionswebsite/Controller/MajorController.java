@@ -65,7 +65,7 @@ public class MajorController {
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy nhóm ngành với ID: " + id));
 
         model.addAttribute("major", major);
-        return "/user/majordetail";
+        return "user/majordetail";
     }
 
     @PostMapping("/admin/xoa-nhom-nganh/{id}")
