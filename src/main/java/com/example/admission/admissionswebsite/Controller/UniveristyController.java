@@ -56,7 +56,7 @@ public class UniveristyController {
         University university = universityService.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy sự kiện với ID: " + id));
         model.addAttribute("university", university);
-        return "/user/universitydetail";
+        return "user/universitydetail";
     }
 
     @PostMapping("/admin/them-truong-dai-hoc")
