@@ -110,7 +110,7 @@ public class EventController {
         Event event = eventService.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy sự kiện với ID: " + id));
         model.addAttribute("event", event);
-        return "/user/eventdetail";
+        return "user/eventdetail";
     }
 
 
