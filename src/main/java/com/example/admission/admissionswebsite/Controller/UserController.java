@@ -48,7 +48,7 @@ public class UserController {
         model.addAttribute("posts", posts);
 
 //        model.addAttribute("uploadPath", uploadPath); // Thêm uploadPath vào model
-        return "/user/home"; // Thymeleaf sẽ render file templates/admin/danhsachtruongdaihoc.html
+        return "user/home"; // Thymeleaf sẽ render file templates/admin/danhsachtruongdaihoc.html
     }
     @GetMapping("/danh-sach-nhom-nganh")
     public String listMajors(Model model,@RequestParam(defaultValue = "0") int page,
