@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{user/layout}">
+
+<main layout:fragment="content">
+<!-- Modal Search Start -->
+<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content rounded-0">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex align-items-center bg-primary">
+                <div class="input-group w-75 mx-auto d-flex">
+                    <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
+                    <span id="search-icon-1" class="btn bg-light border nput-group-text p-3"><i class="fa fa-search"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Search End -->
+
+
+<!-- Carousel Start -->
+<div class="header-carousel owl-carousel">
+    <div class="header-carousel-item bg-primary">
+        <div class="carousel-caption">
+            <div class="container">
+                <div class="row g-4 align-items-center">
+                    <div class="col-lg-7 animated fadeInLeft">
+                        <div class="text-sm-center text-md-start">
+                            <h4 class="text-white text-uppercase fw-bold mb-4">Chào mừng đến với EduExplore</h4>
+                            <h1 class="display-1 text-white mb-4">Cập nhật tin tức tuyển sinh</h1>
+                            <p class="mb-5 fs-5">Tìm kiếm được những thông tin tuyển sinh cập nhật và nhanh chóng ...
+                            </p>
+                            <div class="d-flex justify-content-center justify-content-md-start flex-shrink-0 mb-4">
+                                <a class="btn btn-light rounded-pill py-3 px-4 px-md-5 me-2" href="#"><i class="fas fa-play-circle me-2"></i> Xem video</a>
+                                <a class="btn btn-dark rounded-pill py-3 px-4 px-md-5 ms-2" href="#">Xem thêm</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 animated fadeInRight">
+                        <div class="calrousel-img" style="object-fit: cover;">
+                            <img src="/user/img/explore.png" class="img-fluid w-100" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-carousel-item bg-primary">
+        <div class="carousel-caption">
+            <div class="container">
+                <div class="row gy-4 gy-lg-0 gx-0 gx-lg-5 align-items-center">
+                    <div class="col-lg-5 animated fadeInLeft">
+                        <div class="calrousel-img">
+                            <img src="/user/img/video.png" class="img-fluid w-100" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-7 animated fadeInRight">
+                        <div class="text-sm-center text-md-end">
+                            <h4 class="text-white text-uppercase fw-bold mb-4">Chào mừng đên với EduExplore</h4>
+                            <h1 class="display-1 text-white mb-4">Trải nghiệm học thử chuyên ngành</h1>
+                            <p class="mb-5 fs-5">Bạn có thể trải nghiệm các ngành học bằng các khóa học trong Website...
+                            </p>
+                            <div class="d-flex justify-content-center justify-content-md-end flex-shrink-0 mb-4">
+                                <a class="btn btn-light rounded-pill py-3 px-4 px-md-5 me-2" href="#"><i class="fas fa-play-circle me-2"></i> Xem video</a>
+                                <a class="btn btn-dark rounded-pill py-3 px-4 px-md-5 ms-2" href="#">Xem thêm</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Carousel End -->
+
+<!-- Feature Start -->
+<div class="container-fluid feature bg-light py-5">
+    <div class="container py-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary">Nhóm ngành</h4>
+            <h1 class="display-4 mb-4">Các nhóm ngành đại học</h1>
+            <p class="mb-0">Ngành đào tạo (hay Ngành học) sẽ cung cấp cho người học những kiến thức, kỹ năng chuyên môn về một lĩnh vực nghề nghiệp nhất định. Theo quy định của Bộ Giáo dục và Đào tạo, mỗi ngành được quy định một mã tuyển sinh chung trong xét tuyển Đại học, Cao đẳng.
+            </p>
+        </div>
+        <div class="row g-4">
+            <!-- Lặp qua danh sách Major -->
+            <th:block th:each="major : ${majors}">
+                <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="feature-item p-4 pt-0 h-100 d-flex flex-column">
+                        <div class="feature-icon p-4 mb-4">
+                            <i class="fab fa-slack me-2"></i> <!-- Có thể thay icon theo dữ liệu -->
+                        </div>
+                        <h4 class="mb-3 text-center" th:text="${major.majorGroupName}">Tên Ngành</h4>
+
+                        <!-- Giới hạn chiều cao mô tả để hiển thị tối đa 8 dòng -->
+                        <p class="mb-4 flex-grow-1 overflow-hidden text-wrap"
+                           style="max-height: 12em; line-height: 1.5em;"
+                           th:text="${major.description}">
+                            Mô tả ngành...
+                        </p>
+
+                        <div>
+                            <a class="btn btn-primary rounded-pill py-2 px-4 w-100"
+                               th:href="@{'/chi-tiet-nganh-hoc/' + ${major.id}}">
+                                Xem chi tiết
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+
+
+
+    </div>
+    <div class="nav-btn px-3">
+        <center><a href="/danh-sach-nhom-nganh" class="btn btn-primary rounded-pill py-2 px-4 ms-3 flex-shrink-0"> Xem tất cả</a></center>
+    </div>
+</div>
+<!-- Feature End -->
+
+<!-- About Start -->
+<!-- About End -->
+
+<!-- Service Start -->
+<!-- Service End -->
+
+<!-- FAQs Start -->
+<!-- FAQs End -->
+
+<!-- Blog Start -->
+<div class="container-fluid blog py-5">
+    <div class="container py-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary">Tuyển sinh</h4>
+            <h1 class="display-4 mb-4">Thông tin tuyển sinh</h1>
+            <p class="mb-0">Tổng hợp các bài đăng về các thông tin tuyển sinh mới nhất của BGD hoặc các trường đại học
+            </p>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <div class="row g-4">
+                <!-- Lặp qua danh sách bài đăng -->
+                <th:block th:each="post : ${posts}">
+                    <div class="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="blog-item h-100 d-flex flex-column">
+                            <div class="blog-img">
+                                <img th:src="@{/uploads/{image}(image=${post.image})}" class="img-fluid rounded-top w-100" alt="Bài đăng">
+                                <div class="blog-categiry py-2 px-4">
+                                    <img src="https://daotao.vku.udn.vn/public/images/new.gif">
+                                </div>
+                            </div>
+                            <div class="blog-content p-4 flex-grow-1">
+                                <div class="blog-comment d-flex justify-content-between mb-3">
+                                    <div class="small"><span class="fa fa-user text-primary"></span> </div>
+                                    <div class="small">
+                                        <span class="fa fa-calendar text-primary"></span>
+                                        <span th:text="${#dates.format(post.postDate, 'dd-MM-yyyy')}"></span> <!-- Hiển thị ngày trực tiếp -->
+                                    </div>
+                                    <div class="small"><span class="fa fa-comment-alt text-primary"></span> 6 Bình luận</div>
+                                </div>
+
+                                <a th:href="@{'/chi-tiet-tin-tuc/' + ${post.id}}" class="h4 d-inline-block mb-3" th:text="${post.title}">Tiêu đề bài đăng</a>
+
+                                <!-- Giới hạn mô tả hiển thị tối đa 8 dòng -->
+                                <p class="mb-3 overflow-hidden text-wrap"
+                                   style="max-height: 12em; line-height: 1.5em;"
+                                   th:text="${post.description}">
+                                    Nội dung bài đăng...
+                                </p>
+
+                                <a th:href="@{'/chi-tiet-tin-tuc/' + ${post.id}}" class="btn p-0">Xem chi tiết <i class="fa fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+
+    </div>
+    <div class="nav-btn px-3">
+        <center><a href="/danh-sach-bai-dang-tuyen-sinh" class="btn btn-primary rounded-pill py-2 px-4 ms-3 flex-shrink-0"> Xem tất cả</a></center>
+    </div>
+</div>
+<!-- Blog End -->
+ 
+<!-- Team Start -->
+<div class="container-fluid team pb-5">
+    <div class="container pb-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary">Trường đại học </h4>
+            <h1 class="display-4 mb-4">Danh sách trường đại học</h1>
+            <p class="mb-0">Tổng hợp tất cả các trường đại học tại Đà Nẵng.
+            </p>
+        </div>
+        <div class="row g-4">
+            <div class="row g-4 justify-content-center">
+                <div class="row g-4">
+                    <!-- Lặp qua danh sách các trường đại học -->
+                    <th:block th:each="university : ${universities}">
+                        <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.2s">
+                            <div class="team-item">
+                                <div class="team-img">
+                                    <a th:href="@{'/chi-tiet-truong-dai-hoc/' + ${university.id}}">
+                                        <img th:src="@{/images/{universityLogo}(universityLogo=${university.universityLogo})}"
+                                             class="img-fluid rounded-top w-100" alt="Logo trường">
+                                    </a>
+                                </div>
+                                <div class="team-title p-4">
+                                    <h4 class="mb-0">
+                                        <a th:href="@{'/chi-tiet-truong-dai-hoc/' + ${university.id}}" th:text="${university.nameSchool}" style="color: inherit; text-decoration: none;">
+                                            Tên trường
+                                        </a>
+                                    </h4>
+
+                                </div>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+                <div class="nav-btn px-3">
+                    <center>
+                        <a href="/danh-sach-truong-dai-hoc" class="btn btn-primary rounded-pill py-2 px-4 ms-3 flex-shrink-0">
+                            Xem tất cả
+                        </a>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Team End -->
+    <div class="container-fluid blog py-5">
+        <div class="container py-5">
+            <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                <h4 class="text-primary">Sự kiện</h4>
+                <h1 class="display-4 mb-4">Thông tin sự kiện của các trường</h1>
+                <p class="mb-0">Tổng hợp các bài đăng về các sự kiện mới nhất của các trường đại học
+                </p>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="row g-4">
+                    <!-- Lặp qua danh sách bài đăng -->
+                    <th:block th:each="event : ${events}">
+                        <div class="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.2s">
+                            <div class="blog-item h-100 d-flex flex-column">
+                                <div class="blog-img">
+                                    <img th:src="@{/Events/{imageEvent}(imageEvent=${event.imageEvent})}" class="img-fluid rounded-top w-100" alt="Bài đăng">
+                                    <div class="blog-categiry py-2 px-4">
+                                        <img src="https://daotao.vku.udn.vn/public/images/new.gif">
+                                    </div>
+                                </div>
+                                <div class="blog-content p-4 flex-grow-1">
+                                    <div class="blog-comment d-flex justify-content-between mb-3">
+                                        <div class="small"><span class="fa fa-user text-primary"></span> VKU</div>
+                                        <div class="small">
+                                            <span class="fa fa-calendar text-primary"></span>
+                                            <span th:text="${event.dateEvent}"></span> <!-- Hiển thị ngày trực tiếp -->
+                                        </div>
+                                        <div class="small"><span class="fa fa-comment-alt text-primary"></span> 6 Bình luận</div>
+                                    </div>
+
+                                    <a th:href="@{'/chi-tiet-su-kien/' + ${event.id}}" class="h4 d-inline-block mb-3" th:text="${event.nameEvent}">Tiêu đề bài đăng</a>
+
+                                    <!-- Giới hạn mô tả hiển thị tối đa 8 dòng -->
+                                    <p class="mb-3 overflow-hidden text-wrap"
+                                       style="max-height: 12em; line-height: 1.5em;"
+                                       th:text="${event.description}">
+                                        Nội dung bài đăng...
+                                    </p>
+
+                                    <a th:href="@{'/chi-tiet-su-kien/' + ${event.id}}" class="btn p-0">Xem chi tiết <i class="fa fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+
+        </div>
+        <div class="nav-btn px-3">
+            <center><a href="/danh-sach-su-kien" class="btn btn-primary rounded-pill py-2 px-4 ms-3 flex-shrink-0"> Xem tất cả</a></center>
+        </div>
+    </div>
+
+<!-- Testimonial Start -->
+<!-- Testimonial End -->
+</main>
+</body>
+</html>

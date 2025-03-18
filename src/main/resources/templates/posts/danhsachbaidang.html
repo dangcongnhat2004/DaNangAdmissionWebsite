@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/layout}">
+<main layout:fragment="content">
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <div class="main-panel">
+            <div class="container">
+                <div class="page-inner">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="d-flex align-items-center">
+                                        <h4 class="card-title">Danh sách bài đăng</h4>
+                                    </div>
+                                    <!-- Hiển thị thông báo lỗi -->
+                                    <div th:if="${errorMessage}" class="alert alert-danger text-center">
+                                        <p th:text="${errorMessage}"></p>
+                                    </div>
+                                    <!-- Hiển thị thông báo thành công -->
+                                    <div th:if="${successMessage}" class="alert alert-success text-center">
+                                        <p th:text="${successMessage}"></p>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th>STT</th>
+                                                <th>Tiêu đề</th>
+                                                <th>Mô tả</th>
+                                                <th>Nội dung</th>
+                                                <th>Mã trường</th>
+                                                <th>Ngày đăng</th>
+                                                <th>Hành động</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody th:if="${posts != null and not #lists.isEmpty(posts)}">
+                                            <tr th:each="post, stat : ${posts}">
+                                                <td th:text="${stat.index + 1 + (currentPage * 10)}"></td>
+                                                <td th:text="${post.title}"></td>
+                                                <td th:text="${post.description}"></td>
+                                                <td th:text="${post.content}"></td>
+                                                <td th:text="${post.ownerName}"></td>
+                                                <td th:text="${#dates.format(post.postDate, 'dd-MM-yyyy')}"></td>
+                                                <td>
+                                                    <a th:href="@{/admin/chinh-sua-bai-dang/{id}(id=${post.id})}" class="btn btn-warning">Chỉnh sửa</a>
+                                                    <form th:action="@{/admin/xoa-bai-dang/{id}(id=${post.id})}" method="post" style="display: inline;">
+                                                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                                                        <button type="submit" class="btn btn-danger" onclick="return confirmDelete();">Xóa</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                            <tbody th:if="${posts == null or #lists.isEmpty(posts)}">
+                                            <tr>
+                                                <td colspan="5" class="text-center">Không có bài đăng nào.</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination">
+                                        <!-- Nút Previous -->
+                                        <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                                            <a class="page-link" th:href="@{/admin/danh-sach-bai-dang(page=${currentPage - 1})}" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+
+                                        <!-- Hiển thị số trang -->
+                                        <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                                            th:classappend="${i == currentPage} ? 'active'">
+                                            <a class="page-link" th:href="@{/admin/danh-sach-bai-dang(page=${i})}" th:text="${i + 1}"></a>
+                                        </li>
+
+                                        <!-- Nút Next -->
+                                        <li class="page-item" th:classappend="${currentPage + 1 == totalPages} ? 'disabled'">
+                                            <a class="page-link" th:href="@{/admin/danh-sach-bai-dang(page=${currentPage + 1})}" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Custom template | don't include it in your project! -->
+        <!-- End Custom template -->
+    </div>
+    <script>
+        function confirmDelete() {
+            return confirm('Bạn có chắc chắn muốn xóa bài đăng này không?');
+        }
+    </script>
+</main>
+</html>

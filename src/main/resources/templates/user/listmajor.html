@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{user/layout}">
+
+<main layout:fragment="content">
+
+
+    <!-- Feature Start -->
+    <div class="container-fluid feature bg-light py-5">
+        <div class="container py-5">
+            <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                <h4 class="text-primary">Nhóm ngành</h4>
+                <h1 class="display-4 mb-4">Các nhóm ngành đại học</h1>
+                <p class="mb-0">Ngành đào tạo (hay Ngành học) sẽ cung cấp cho người học những kiến thức, kỹ năng chuyên môn về một lĩnh vực nghề nghiệp nhất định. Theo quy định của Bộ Giáo dục và Đào tạo, mỗi ngành được quy định một mã tuyển sinh chung trong xét tuyển Đại học, Cao đẳng.
+                </p>
+            </div>
+            <div class="row g-4">
+
+                <!-- Lặp qua danh sách Major -->
+                <th:block th:each="major : ${majors}">
+                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="feature-item p-4 pt-0 h-100 d-flex flex-column">
+                            <div class="feature-icon p-4 mb-4">
+                                <i class="fab fa-artstation"></i> <!-- Có thể thay icon theo dữ liệu -->
+                            </div>
+                            <h4 class="mb-3 text-center" th:text="${major.majorGroupName}">Tên Ngành</h4>
+
+                            <!-- Giới hạn chiều cao mô tả để hiển thị tối đa 8 dòng -->
+                            <p class="mb-4 flex-grow-1 overflow-hidden text-wrap"
+                               style="max-height: 12em; line-height: 1.5em;"
+                               th:text="${major.description}">
+                                Mô tả ngành...
+                            </p>
+
+                            <div>
+                                <a class="btn btn-primary rounded-pill py-2 px-4 w-100"
+                                   th:href="@{/chi-tiet-nganh-hoc/{id}(id=${major.id})}">
+                                    Xem chi tiết
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+                <tbody th:if="${majors == null or #lists.isEmpty(majors)}">
+                <tr>
+                    <td colspan="6" class="text-center">Không có ngành nào.</td>
+                </tr>
+                </tbody>
+            </div>
+<br>
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                        <a class="page-link" th:href="@{/danh-sach-nhom-nganh(page=${currentPage - 1})}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}" th:classappend="${i == currentPage} ? 'active'">
+                        <a class="page-link" th:href="@{/danh-sach-nhom-nganh(page=${i})}" th:text="${i + 1}"></a>
+                    </li>
+                    <li class="page-item" th:classappend="${currentPage + 1 == totalPages} ? 'disabled'">
+                        <a class="page-link" th:href="@{/danh-sach-nhom-nganh(page=${currentPage + 1})}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+
+    </div>
+    <!-- Feature End -->
+
+</main>
+</body>
+</html>

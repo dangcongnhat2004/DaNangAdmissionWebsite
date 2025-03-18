@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{user/layout}">
+<main layout:fragment="content">
+    <div class="container py-5">
+        <div class="text-center mx-auto pb-4" style="max-width: 800px;">
+            <h4 class="text-primary">Sự kiện cập nhật</h4>
+            <h1 class="display-6 mb-3">Thông tin sự kiện mới nhất</h1>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="list-group">
+                    <!-- Lặp qua danh sách sự kiện -->
+                    <th:block th:each="event : ${events}">
+                        <div class="list-group-item py-4 border rounded mb-3">
+                            <div class="d-flex align-items-start">
+                                <!-- Hình ảnh sự kiện -->
+                                <img th:src="@{/Events/{imageEvent}(imageEvent=${event.imageEvent})}"
+                                     class="img-fluid rounded" style="width: 150px; height: 100px; object-fit: cover;"
+                                     alt="Hình ảnh sự kiện">
+
+                                <div class="ms-3 flex-grow-1">
+                                    <!-- Tiêu đề sự kiện -->
+                                    <h5 class="mb-2">
+                                        <a th:href="@{'/post/' + ${event.id}}" th:text="${event.nameEvent}"></a>
+                                    </h5>
+
+                                    <!-- Ngày tổ chức -->
+                                    <p class="mb-1 small text-muted">
+                                        <i class="fa fa-calendar text-primary"></i>
+                                        <span th:text="${event.dateEvent}"></span>
+                                    </p>
+
+                                    <!-- Mô tả ngắn gọn -->
+                                    <p class="mb-2 text-truncate" style="max-width: 600px;" th:text="${event.description}"></p>
+
+                                    <a th:href="@{'/chi-tiet-su-kien/' + ${event.id}}" class="btn btn-sm btn-primary">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Phân trang -->
+        <nav aria-label="Page navigation" class="mt-4">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                    <a class="page-link" th:href="@{/danh-sach-su-kien(page=${currentPage - 1})}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                    th:classappend="${i == currentPage} ? 'active'">
+                    <a class="page-link" th:href="@{/danh-sach-su-kien(page=${i})}" th:text="${i + 1}"></a>
+                </li>
+                <li class="page-item" th:classappend="${currentPage + 1 == totalPages} ? 'disabled'">
+                    <a class="page-link" th:href="@{/danh-sach-su-kien(page=${currentPage + 1})}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</main>
+</body>
+</html>

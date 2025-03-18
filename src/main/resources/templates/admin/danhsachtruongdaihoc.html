@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout}">
+
+<main layout:fragment="content">
+  <div class="wrapper">
+    <!-- Sidebar -->
+
+    <div class="main-panel">
+
+      <div class="container">
+        <div class="page-inner">
+          <div class="row">
+
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <div class="d-flex align-items-center">
+                    <h4 class="card-title">Danh sách trường đại học</h4>
+                  </div>
+                  <div th:if="${errorMessage}" class="alert alert-danger text-center">
+                    <p th:text="${errorMessage}"></p>
+                  </div>
+                  <!-- Hiển thị thông báo thành công nếu có -->
+                  <div th:if="${successMessage}" class="alert alert-success text-center">
+                    <p th:text="${successMessage}"></p>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+
+                      <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Tên trường</th>
+                        <th>Mã trường</th>
+                        <th>Địa chỉ</th>
+                        <th>Mô tả</th>
+<!--                        <th>Logo</th>-->
+                        <th>Hành động</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr th:each="university : ${universities}">
+                        <td th:text="${university.id}"></td>
+                        <td th:text="${university.nameSchool}"></td>
+                        <td th:text="${university.uniCode}"></td>
+                        <td th:text="${university.address}"></td>
+                        <td th:text="${university.description}"></td>
+<!--                        <td>-->
+<!--                          <img th:src="@{/images/{universityLogo}(universityLogo=${university.universityLogo})}" alt="Logo trường" style="width: 100px; height: auto;">-->
+<!--                        </td>-->
+                        <td>
+                          <div class="form-button-action">
+
+                          <!-- Nút chỉnh sửa -->
+                          <a th:href="@{/admin/chinh-sua-truong-dai-hoc/{id}(id=${university.id})}"
+                             class="btn btn-warning"
+                             style="margin-right: 5px;">
+                            Chỉnh sửa
+                          </a>
+                          <form th:action="@{/admin/xoa-truong-dai-hoc/{id}(id=${university.id})}" method="post">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                            <input type="hidden" name="_method" value="delete" />
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</button>
+                          </form>
+                          </div>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Custom template | don't include it in your project! -->
+    <!-- End Custom template -->
+  </div>
+
+  <script>
+    function confirmDelete() {
+      return confirm('Bạn có chắc chắn muốn xóa trường đại học này không?');
+    }
+
+  </script>
+  </div>
+</main>
+</body>
+</html>
