@@ -25,12 +25,12 @@ public class UserController {
     public String showSignUpForm(Model model) {
         model.addAttribute("user", new Users());
 
-        return "/home/register";
+        return "home/register";
     }
     @GetMapping("/auth/login")
     public String loginPage(@ModelAttribute("successMessage") String successMessage, Model model) {
         model.addAttribute("successMessage", successMessage);
-        return "/home/login"; // This will render login.html
+        return "home/login"; // This will render login.html
     }
 //    @GetMapping("/")
 //    public String homePage() {
@@ -65,7 +65,7 @@ public class UserController {
             model.addAttribute("errorMessage", "Lỗi khi lấy danh sách ngành học: " + e.getMessage());
         }
 //        model.addAttribute("uploadPath", uploadPath); // Thêm uploadPath vào model
-        return "/user/listmajor"; // Thymeleaf sẽ render file templates/admin/danhsachtruongdaihoc.html
+        return "user/listmajor"; // Thymeleaf sẽ render file templates/admin/danhsachtruongdaihoc.html
     }
 
     @GetMapping("/danh-sach-truong-dai-hoc")
@@ -83,7 +83,7 @@ public class UserController {
             model.addAttribute("errorMessage", "Lỗi khi lấy danh sách ngành học: " + e.getMessage());
         }
 //        model.addAttribute("uploadPath", uploadPath); // Thêm uploadPath vào model
-        return "/user/listuniversity"; // Thymeleaf sẽ render file templates/admin/danhsachtruongdaihoc.html
+        return "user/listuniversity"; // Thymeleaf sẽ render file templates/admin/danhsachtruongdaihoc.html
     }
     @GetMapping("/danh-sach-su-kien")
     public String listEvent(Model model,@RequestParam(defaultValue = "0") int page,
@@ -100,7 +100,7 @@ public class UserController {
             model.addAttribute("errorMessage", "Lỗi khi lấy danh sách ngành học: " + e.getMessage());
         }
 //        model.addAttribute("uploadPath", uploadPath); // Thêm uploadPath vào model
-        return "/user/listevent"; // Thymeleaf sẽ render file templates/admin/danhsachtruongdaihoc.html
+        return "user/listevent"; // Thymeleaf sẽ render file templates/admin/danhsachtruongdaihoc.html
     }
     @GetMapping("/danh-sach-bai-dang-tuyen-sinh")
     public String listAdmissionPost(Model model,@RequestParam(defaultValue = "0") int page,
@@ -117,7 +117,7 @@ public class UserController {
             model.addAttribute("errorMessage", "Lỗi khi lấy danh sách ngành học: " + e.getMessage());
         }
 //        model.addAttribute("uploadPath", uploadPath); // Thêm uploadPath vào model
-        return "/user/listadmissionpost"; // Thymeleaf sẽ render file templates/admin/danhsachtruongdaihoc.html
+        return "user/listadmissionpost"; // Thymeleaf sẽ render file templates/admin/danhsachtruongdaihoc.html
     }
 
     @GetMapping("/chi-tiet-tin-tuc/{id}")
@@ -125,7 +125,7 @@ public class UserController {
         AdminPost adminPost = adminPostService.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy sự kiện với ID: " + id));
         model.addAttribute("adminPost", adminPost);
-        return "/user/postdetail";
+        return "user/postdetail";
     }
     @GetMapping("/user/course")
     public String course() {
