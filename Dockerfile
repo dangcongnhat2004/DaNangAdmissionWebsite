@@ -1,4 +1,5 @@
-FROM maven:3.9.9-amazoncorretto-8-al2023 AS build
+# Build phase with JDK 17
+FROM maven:3.9.9-amazoncorretto-17-al2023 AS build
 
 WORKDIR /app
 
@@ -7,7 +8,7 @@ COPY src ./src
 
 RUN mvn clean package -DskipTests
 
-# Use OpenJDK to run the application
+# Run phase with JDK 17
 FROM openjdk:17-slim-bullseye
 
 WORKDIR /app
