@@ -24,7 +24,7 @@
               <!-- Nội dung trường đại học -->
               <div class="flex-grow-1">
                 <h4>
-                  <a th:href="@{/chi-tiet-tin-tuc/{id}(id=${admissions.id})}"
+                  <a th:href="@{/user/chi-tiet-tin-tuc/{id}(id=${admissions.id})}"
                      class="text-dark text-decoration-none">
                     <span th:text="${admissions.title}">Tên trường</span>
                   </a>
@@ -43,16 +43,16 @@
         <nav aria-label="Page navigation" class="mt-4">
           <ul class="pagination justify-content-center">
             <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
-              <a class="page-link" th:href="@{/danh-sach-bai-dang-tuyen-sinh(page=${currentPage - 1})}" aria-label="Previous">
+              <a class="page-link" th:href="@{/user/danh-sach-bai-dang-tuyen-sinh(page=${currentPage - 1})}" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
             <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
                 th:classappend="${i == currentPage} ? 'active'">
-              <a class="page-link" th:href="@{/danh-sach-bai-dang-tuyen-sinh(page=${i})}" th:text="${i + 1}"></a>
+              <a class="page-link" th:href="@{/user/danh-sach-bai-dang-tuyen-sinh(page=${i})}" th:text="${i + 1}"></a>
             </li>
             <li class="page-item" th:classappend="${currentPage + 1 == totalPages} ? 'disabled'">
-              <a class="page-link" th:href="@{/danh-sach-bai-dang-tuyen-sinh(page=${currentPage + 1})}" aria-label="Next">
+              <a class="page-link" th:href="@{/user/danh-sach-bai-dang-tuyen-sinh(page=${currentPage + 1})}" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
               </a>
             </li>
