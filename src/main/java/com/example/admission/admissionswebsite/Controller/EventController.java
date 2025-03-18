@@ -105,7 +105,7 @@ public class EventController {
         return "redirect:/admin/danh-sach-su-kien";
     }
 
-    @GetMapping("/chi-tiet-su-kien/{id}")
+    @GetMapping("/user/chi-tiet-su-kien/{id}")
     public String showEventDetails(@PathVariable Integer id, Model model) {
         Event event = eventService.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy sự kiện với ID: " + id));
