@@ -50,7 +50,7 @@ public class UserController {
 //        model.addAttribute("uploadPath", uploadPath); // Thêm uploadPath vào model
         return "user/home"; // Thymeleaf sẽ render file templates/admin/danhsachtruongdaihoc.html
     }
-    @GetMapping("/danh-sach-nhom-nganh")
+    @GetMapping("/user/danh-sach-nhom-nganh")
     public String listMajors(Model model,@RequestParam(defaultValue = "0") int page,
                              @RequestParam(defaultValue = "8") int size) {
         try {
@@ -68,7 +68,7 @@ public class UserController {
         return "user/listmajor"; // Thymeleaf sẽ render file templates/admin/danhsachtruongdaihoc.html
     }
 
-    @GetMapping("/danh-sach-truong-dai-hoc")
+    @GetMapping("/user/danh-sach-truong-dai-hoc")
     public String listUniversity(Model model,@RequestParam(defaultValue = "0") int page,
                              @RequestParam(defaultValue = "8") int size) {
         try {
@@ -85,7 +85,7 @@ public class UserController {
 //        model.addAttribute("uploadPath", uploadPath); // Thêm uploadPath vào model
         return "user/listuniversity"; // Thymeleaf sẽ render file templates/admin/danhsachtruongdaihoc.html
     }
-    @GetMapping("/danh-sach-su-kien")
+    @GetMapping("/user/danh-sach-su-kien")
     public String listEvent(Model model,@RequestParam(defaultValue = "0") int page,
                                  @RequestParam(defaultValue = "8") int size) {
         try {
@@ -102,7 +102,7 @@ public class UserController {
 //        model.addAttribute("uploadPath", uploadPath); // Thêm uploadPath vào model
         return "user/listevent"; // Thymeleaf sẽ render file templates/admin/danhsachtruongdaihoc.html
     }
-    @GetMapping("/danh-sach-bai-dang-tuyen-sinh")
+    @GetMapping("/user/danh-sach-bai-dang-tuyen-sinh")
     public String listAdmissionPost(Model model,@RequestParam(defaultValue = "0") int page,
                                  @RequestParam(defaultValue = "6") int size) {
         try {
@@ -120,7 +120,7 @@ public class UserController {
         return "user/listadmissionpost"; // Thymeleaf sẽ render file templates/admin/danhsachtruongdaihoc.html
     }
 
-    @GetMapping("/chi-tiet-tin-tuc/{id}")
+    @GetMapping("/user/chi-tiet-tin-tuc/{id}")
     public String showNewDetails(@PathVariable Integer id, Model model) {
         AdminPost adminPost = adminPostService.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy sự kiện với ID: " + id));
