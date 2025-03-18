@@ -2,7 +2,6 @@ version: '3.8'
 services:
   app:
     build: .
-    image: danangadmissionwebsite-app   # THÊM DÒNG NÀY
     ports:
       - "8087:8087"
     restart: always
