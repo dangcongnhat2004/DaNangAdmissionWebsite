@@ -29,11 +29,11 @@ public class AuthController {
         if (response.getStatusCode() == 200) {
             // Nếu đăng ký thành công, hiển thị thông báo thành công và chuyển hướng đến trang login
             model.addAttribute("successMessage", "Đăng ký thành công! Vui lòng đăng nhập.");
-            return "/home/login";  // Chuyển đến trang đăng nhập
+            return "home/login";  // Chuyển đến trang đăng nhập
         } else {
             // Nếu có lỗi, hiển thị thông báo lỗi và quay lại trang đăng ký
             model.addAttribute("errorMessage", response.getMessage() != null ? response.getMessage() : "Đã xảy ra lỗi.");
-            return "/home/register";  // Quay lại trang đăng ký
+            return "home/register";  // Quay lại trang đăng ký
         }
     }
 
@@ -71,10 +71,10 @@ public class AuthController {
             }
         } else {
             model.addAttribute("errorMessage", "Email hoặc mật khẩu không chính xác.");
-            return "/home/login";
+            return "home/login";
         }
 
-        return "/home/login";
+        return "home/login";
     }
 
 
